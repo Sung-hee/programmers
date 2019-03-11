@@ -1,18 +1,22 @@
 function solution(clothes) {
-  var answer = 0;
-  var json = {};
+  var mMap = new Map();
 
-  clothes.forEach(function(index) {
-    if (json[index[1]] >= 1) {
-      json[index[1]] += 1;
+  for (var i = 0; i < clothes.length; i++) {
+    var key = clothes[i][1];
+
+    if (!mMap.get(key)) {
+      mMap.set(key, 1)
     }
     else {
-      json[index[1]] = 1;
+      mMap.set(key, mMap.get(key) + 1)
+      // console.log(mMap)
     }
-  });
+  }
+  
+  var answer = 1;
 
-  for (var i in json) {
-    answer *= (json[i] + 1)
+  for (var value of mMap.values()) {
+    answer *= (value + 1);
   }
   return answer - 1;
 }
